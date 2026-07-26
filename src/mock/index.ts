@@ -1,0 +1,35 @@
+import { addresses, cartItems, categories, coupons, orders, products } from './data'
+
+type MockResponse = { code: number; message: string; data: unknown }
+
+const ok = (data: unknown): MockResponse => ({ code: 200, message: 'success', data })
+
+export async function mockRequest(method: string, url: string, data?: unknown): Promise<MockResponse> {
+  await new Promise((resolve) => setTimeout(resolve, 160))
+  const path = url.replace(/^\/api\/v1/, '').split('?')[0]
+
+  if (method === 'post' && path === '/auth/send-code') return ok({ sent: true })
+  if (method === 'post' && path === '/auth/login') return ok({ token: 'mock-token', user: { id: 'u1', name: '林夏', level: '银卡会员' } })
+  if (method === 'get' && path === '/categories') return ok(categories)
+  if (method === 'get' && path === '/products') return ok(products)
+  if (method === 'get' && path.startsWith('/products/')) return ok(products.find((item) => item.id === path.split('/').pop()) || products[0])
+  if (method === 'get' && path === '/cart') return ok(cartItems)
+  if (method === 'post' && path === '/cart/items') return ok(cartItems[0])
+  if (method === 'put' && path.startsWith('/cart/items/')) return ok({ updated: true })
+  if (method === 'delete' && path.startsWith('/cart/items/')) return ok({ deleted: true })
+  if (method === 'post' && path === '/cart/merge') return ok(cartItems)
+  if (method === 'get' && path === '/addresses') return ok(addresses)
+  if (['post', 'put', 'delete'].includes(method) && path.startsWith('/addresses')) return ok({ saved: true })
+  if (method === 'post' && path === '/orders') return ok(orders[0])
+  if (method === 'get' && path === '/orders') return ok(orders)
+  if (method === 'get' && path.startsWith('/orders/') && !path.includes('pay-status')) return ok(orders.find((item) => item.id === path.split('/').pop()) || orders[0])
+  if (method === 'post' && path.endsWith('/pay')) return ok({ payUrl: '/pay/result?status=success&orderId=O20260724001' })
+  if (method === 'get' && path.endsWith('/pay-status')) return ok({ status: 'success' })
+  if (method === 'get' && path === '/coupons') return ok(coupons)
+  if (method === 'post' && path.includes('/coupons/')) return ok({ received: true })
+  if (method === 'post' && path === '/reviews') return ok({ published: true })
+  if (method === 'post' && path === '/aftersales') return ok({ id: 'AS20260724001', status: 'pending' })
+  if (method === 'get' && path === '/verify') return ok({ valid: true, productName: '云柔修护精华水', checkedAt: new Date().toISOString() })
+
+  return { code: 404, message: '未找到 Mock 接口', data: null }
+}
