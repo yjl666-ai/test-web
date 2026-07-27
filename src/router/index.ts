@@ -12,6 +12,7 @@ const router = createRouter({
     { path: '/cart', component: () => import('../views/Cart/CartView.vue') },
     { path: '/checkout', component: () => import('../views/Checkout/CheckoutView.vue'), meta: { requiresAuth: true } },
     { path: '/pay/result', component: () => import('../views/Pay/PayResultView.vue') },
+    { path: '/admin/orders', component: () => import('../views/Admin/AdminOrdersView.vue') },
     { path: '/login', component: () => import('../views/Login/LoginView.vue') },
     { path: '/user', component: () => import('../views/User/UserCenterView.vue'), meta: { requiresAuth: true } },
     { path: '/user/orders', component: () => import('../views/Order/OrderListView.vue'), meta: { requiresAuth: true } },

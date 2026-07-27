@@ -1,6 +1,6 @@
-# Beauty Commerce
+# Fashion Commerce
 
-Pure frontend beauty and personal care MVP built with Vue 3, TypeScript, Vite, Vant 4, Pinia, Vue Router, and Axios.
+Pure frontend fashion commerce MVP built with Vue 3, TypeScript, Vite, Vant 4, Pinia, Vue Router, and Axios.
 
 The app includes local mock data, so it can run without a backend.
 

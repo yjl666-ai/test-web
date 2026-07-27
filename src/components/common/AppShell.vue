@@ -3,12 +3,13 @@ defineProps<{
   title?: string
   showBack?: boolean
   showTabbar?: boolean
+  backTo?: string
 }>()
 </script>
 
 <template>
   <div class="app-shell">
-    <van-nav-bar v-if="title" :title="title" :left-arrow="showBack" fixed placeholder @click-left="$router.back()" />
+    <van-nav-bar v-if="title" :title="title" :left-arrow="showBack" fixed placeholder @click-left="backTo ? $router.replace(backTo) : $router.back()" />
     <main class="app-shell__main" :class="{ 'app-shell__main--tabbar': showTabbar }">
       <slot />
     </main>

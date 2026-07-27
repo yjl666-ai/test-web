@@ -12,10 +12,11 @@ const router = useRouter()
 const keyword = ref(String(route.query.keyword || ''))
 const sort = ref(String(route.query.sort || 'sales'))
 const products = ref<Product[]>([])
-const history = ref<string[]>(JSON.parse(localStorage.getItem('beauty-search-history') || '["精华","唇釉","礼盒"]'))
+const history = ref<string[]>(JSON.parse(localStorage.getItem('beauty-search-history') || '["连衣裙","短袖衬衫","牛仔夹克"]'))
 
 const visibleProducts = computed(() => {
-  const list = products.value.filter((item) => !keyword.value || item.name.includes(keyword.value) || item.tags.join('').includes(keyword.value))
+  const value = keyword.value.trim()
+  const list = products.value.filter((item) => !value || item.name.includes(value) || item.brand.includes(value) || item.tags.join('').includes(value))
   return [...list].sort((a, b) => (sort.value === 'price' ? a.price - b.price : b.sales - a.sales))
 })
 
@@ -33,7 +34,7 @@ onMounted(async () => {
 
 <template>
   <AppShell title="搜索" show-back>
-    <van-search v-model="keyword" placeholder="搜索精华、唇釉、礼盒" show-action @search="search" @cancel="$router.back()" />
+    <van-search v-model="keyword" placeholder="搜索连衣裙、衬衫、外套" show-action @search="search" @cancel="$router.back()" />
     <div class="chips">
       <button v-for="item in history" :key="item" @click="search(item)">{{ item }}</button>
     </div>
@@ -42,7 +43,7 @@ onMounted(async () => {
       <van-tab title="价格" name="price" />
       <van-tab title="新品" name="new" />
     </van-tabs>
-    <StateBlock v-if="!visibleProducts.length" title="没有找到相关商品" action="换个词试试" />
+    <StateBlock v-if="!visibleProducts.length" title="没有找到相关服装" action="换个词试试" />
     <div v-else class="product-grid">
       <ProductCard v-for="item in visibleProducts" :key="item.id" :product="item" />
     </div>

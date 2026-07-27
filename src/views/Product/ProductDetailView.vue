@@ -38,7 +38,7 @@ async function addToCart(buyNow = false) {
   <AppShell title="商品详情" show-back>
     <van-skeleton v-if="!product" title :row="8" />
     <template v-else>
-      <van-swipe class="detail-swipe" indicator-color="#ff6f91">
+      <van-swipe class="detail-swipe" indicator-color="#1f2a1f">
         <van-swipe-item v-for="image in product.images" :key="image"><img :src="image" :alt="product.name" /></van-swipe-item>
       </van-swipe>
       <section class="detail-panel">
@@ -51,17 +51,17 @@ async function addToCart(buyNow = false) {
         <button class="sku-line" @click="showSku = true">已选 {{ Object.values(selectedSku?.specs || {}).join(' / ') }} · 库存 {{ selectedSku?.stock }}</button>
       </section>
       <section class="detail-panel">
-        <h2>真实评价</h2>
-        <p>98% 用户认为质地清爽，物流 48 小时内发出。</p>
+        <h2>穿着反馈</h2>
+        <p>多数用户反馈版型稳定、面料舒适，日常洗护后仍能保持较好的轮廓感。</p>
       </section>
       <section class="detail-panel">
         <h2>图文详情</h2>
-        <p>{{ product.brand }} 坚持正品供应链，所有商品支持防伪查询和售后申请。</p>
+        <p>{{ product.brand }} 按尺码表发货，支持 7 天无理由退换；建议根据肩宽、胸围、腰围优先选择尺码。</p>
       </section>
       <van-action-bar>
         <van-action-bar-icon icon="cart-o" text="购物车" @click="router.push('/cart')" />
-        <van-action-bar-button color="#ffb3c2" text="加入购物车" :loading="submitting" @click="addToCart()" />
-        <van-action-bar-button color="#ff6f91" text="立即购买" :loading="submitting" @click="addToCart(true)" />
+        <van-action-bar-button color="#8b7355" text="加入购物车" :loading="submitting" @click="addToCart()" />
+        <van-action-bar-button color="#1f2a1f" text="立即购买" :loading="submitting" @click="addToCart(true)" />
       </van-action-bar>
       <van-popup v-model:show="showSku" round position="bottom">
         <div class="popup-panel">

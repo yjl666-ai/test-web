@@ -36,7 +36,7 @@ async function submit() {
 </script>
 
 <template>
-  <AppShell title="登录注册" show-back>
+  <AppShell title="登录注册" show-back back-to="/">
     <section class="login-card">
       <h1>欢迎回来</h1>
       <p>登录后同步购物车、地址和订单。</p>

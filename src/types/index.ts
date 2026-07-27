@@ -57,6 +57,34 @@ export type Order = {
   createdAt: string
 }
 
+export type AdminOrderItem = {
+  id: string
+  productId: string
+  skuId: string
+  productName: string
+  brand: string
+  image: string
+  specs: Record<string, string>
+  unitPrice: number
+  count: number
+  subtotal: number
+}
+
+export type AdminOrder = {
+  id: string
+  userId: string
+  userName: string
+  userPhone: string
+  status: OrderStatus
+  createdAt: string
+  totalAmount: number
+  freightAmount: number
+  discountAmount: number
+  payableAmount: number
+  address: Address
+  items: AdminOrderItem[]
+}
+
 export type Coupon = {
   id: string
   title: string

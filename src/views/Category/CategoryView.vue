@@ -10,7 +10,7 @@ const route = useRoute()
 const router = useRouter()
 const categories = ref<Array<{ id: string; name: string }>>([])
 const products = ref<Product[]>([])
-const activeId = computed(() => String(route.params.id || categories.value[0]?.id || 'skin'))
+const activeId = computed(() => String(route.params.id || categories.value[0]?.id || 'women'))
 const visibleProducts = computed(() => products.value.filter((item) => item.categoryId === activeId.value))
 
 onMounted(async () => {

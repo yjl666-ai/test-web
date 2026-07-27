@@ -1,5 +1,5 @@
 import { request } from './request'
-import type { Order } from '../types'
+import type { AdminOrder, Order } from '../types'
 
 export function createOrder(data: { addressId: string; cartItemIds: string[]; couponId?: string }) {
   return request<Order>({ url: '/orders', method: 'post', data })
@@ -7,6 +7,10 @@ export function createOrder(data: { addressId: string; cartItemIds: string[]; co
 
 export function getOrders() {
   return request<Order[]>({ url: '/orders', method: 'get' })
+}
+
+export function getAdminOrders() {
+  return request<AdminOrder[]>({ url: '/admin/orders', method: 'get' })
 }
 
 export function getOrderDetail(id: string) {
